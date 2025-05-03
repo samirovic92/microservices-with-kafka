@@ -7,9 +7,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @AllArgsConstructor
@@ -18,7 +16,7 @@ public class ProductService {
     private final KafkaTemplate<String, ProductCreatedEvent> kafkaTemplate;
 
 
-    public String createProduct(CreateProductRequest product) {
+    public String createProduct(CreateProductRequest product) throws Exception {
         var productId = UUID.randomUUID().toString();
         var productCreatedEvent = ProductCreatedEvent.builder()
                 .productId(productId)
@@ -26,16 +24,21 @@ public class ProductService {
                 .price(product.price())
                 .quantity(product.quantity())
                 .build();
-        CompletableFuture<SendResult<String, ProductCreatedEvent>> future =
-                kafkaTemplate.send("product-created-events-topic", productId, productCreatedEvent);
 
-        future.whenComplete((result, exception) -> {
-            if (Objects.nonNull(exception)) {
-                log.error("***** Error sending message: {} *****", exception.getMessage());
-            } else {
-                log.info("***** Message sent successfully: {} *****", result.getRecordMetadata());
-            }
-        });
+        log.info("send productCreatedEvent  : {}", productCreatedEvent);
+
+        SendResult<String, ProductCreatedEvent> result = kafkaTemplate.send("product-created-events-topic", productId, productCreatedEvent).get();
+        log.info("Topic : {}", result.getRecordMetadata().topic());
+        log.info("Partition : {}", result.getRecordMetadata().partition());
+        log.info("offset : {}", result.getRecordMetadata().offset());
+
+        // future.whenComplete((result, exception) -> {
+        //     if (Objects.nonNull(exception)) {
+        //         log.error("***** Error sending message: {} *****", exception.getMessage());
+        //     } else {
+        //         log.info("***** Message sent successfully: {} *****", result.getRecordMetadata());
+        //     }
+        // });
         log.info("***** create product successfully *****");
         return productId;
     }
