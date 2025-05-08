@@ -10,7 +10,8 @@ spring:
       acks: all
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      retries: 30
+      retries: 10
       properties:
         retry.backoff.ms: 1000
+        enable.idempotence: true
         # delivery.timeout.ms: 60000 # best practice (instead of retires and backoff)
