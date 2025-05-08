@@ -7,6 +7,6 @@ spring:
     consumer:
       group-id: product-created-events
       properties:
-        spring.json.trusted.packages: '*'
+        spring.json.trusted.packages: 'com.samic.events'
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
