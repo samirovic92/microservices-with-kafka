@@ -1,7 +1,7 @@
-package com.samic.ProductService.rest;
+package com.samic.rest;
 
-import com.samic.ProductService.rest.dto.CreateProductRequest;
-import com.samic.ProductService.service.ProductService;
+import com.samic.rest.dto.CreateProductRequest;
+import com.samic.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

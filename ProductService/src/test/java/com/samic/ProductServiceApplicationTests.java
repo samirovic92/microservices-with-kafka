@@ -1,4 +1,4 @@
-package com.samic.ProductService;
+package com.samic;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.samic.ProductService.config;
+package com.samic.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;

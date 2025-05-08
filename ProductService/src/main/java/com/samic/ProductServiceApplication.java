@@ -1,4 +1,4 @@
-package com.samic.ProductService;
+package com.samic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

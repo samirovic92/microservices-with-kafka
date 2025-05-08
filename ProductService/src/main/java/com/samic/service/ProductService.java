@@ -1,6 +1,7 @@
-package com.samic.ProductService.service;
+package com.samic.service;
 
-import com.samic.ProductService.rest.dto.CreateProductRequest;
+import com.samic.events.ProductCreatedEvent;
+import com.samic.rest.dto.CreateProductRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
