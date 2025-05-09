@@ -6,8 +6,8 @@ spring:
     bootstrap-servers: localhost:9092,localhost:9094
     consumer:
       group-id: product-created-events
-      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      # key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      # value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       properties:
         spring.json.trusted.packages: 'com.samic.events'
         spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
