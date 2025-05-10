@@ -26,7 +26,7 @@ public class ProductEventsHandler {
         try {
             var success_request_url = request_url + "/200";
             var failure_request_url = request_url + "/500";
-            var response = restTemplate.getForEntity(failure_request_url, String.class);
+            var response = restTemplate.getForEntity(success_request_url, String.class);
             if (response.getStatusCode().is2xxSuccessful()) {
                 System.out.println("Received response: " + response.getBody());
             }
