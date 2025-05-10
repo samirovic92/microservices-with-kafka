@@ -14,7 +14,7 @@ server:
 #         spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
 
 kafka:
+  bootstrap-servers: localhost:9092,localhost:9094
   consumer:
-    bootstrap-servers: localhost:9092,localhost:9094
     group-id: product-created-events
     trusted-packages: com.samic.events
