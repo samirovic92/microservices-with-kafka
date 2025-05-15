@@ -2,8 +2,11 @@ package com.samic.service;
 
 import com.samic.events.ProductCreatedEvent;
 import com.samic.rest.dto.CreateProductRequest;
+import com.sun.net.httpserver.Headers;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.header.Header;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
@@ -28,7 +31,14 @@ public class ProductService {
 
         log.info("send productCreatedEvent  : {}", productCreatedEvent);
 
-        SendResult<String, ProductCreatedEvent> result = kafkaTemplate.send("product-created-events-topic", productId, productCreatedEvent).get();
+        ProducerRecord<String, ProductCreatedEvent> record = new ProducerRecord<>(
+                "product-created-events-topic",
+                productId,
+                productCreatedEvent
+        );
+        record.headers().add("messageId", productId.getBytes());
+
+        SendResult<String, ProductCreatedEvent> result = kafkaTemplate.send(record).get();
         log.info("Topic : {}", result.getRecordMetadata().topic());
         log.info("Partition : {}", result.getRecordMetadata().partition());
         log.info("offset : {}", result.getRecordMetadata().offset());
