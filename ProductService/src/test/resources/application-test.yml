@@ -1,0 +1,11 @@
+
+
+kafka:
+    consumer:
+      auto-offset-reset: earliest
+      group-id: product-created-event
+      trusted-packages: com.samic.events
+
+topic:
+    product:
+        name: product-created-events-topic
