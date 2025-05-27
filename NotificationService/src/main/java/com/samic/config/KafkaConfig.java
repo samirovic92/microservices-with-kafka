@@ -38,6 +38,7 @@ public class KafkaConfig {
         config.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
         config.put(JsonDeserializer.TRUSTED_PACKAGES, environment.getProperty("kafka.consumer.trusted-packages"));
         config.put(ConsumerConfig.GROUP_ID_CONFIG, environment.getProperty("kafka.consumer.group-id"));
+        config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         return new DefaultKafkaConsumerFactory<>(config);
     }
 
